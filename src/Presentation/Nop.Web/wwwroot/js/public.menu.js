@@ -60,7 +60,7 @@
                 let listItems = selfTop.categoryList(result, true);
                 if (listItems.length === 0) { $(catSel).addClass("loaded"); return; }
 
-                $('<ul/>', { 'class': 'sublist' }).appendTo($(catSel));
+                $('<ul/>', { class: 'sublist' }).appendTo($(catSel));
 
                 $(catSel).addClass("loaded");
 
@@ -130,10 +130,10 @@
 
         let li = $('<li/>');
 
-        $('<a/>', { 'href': data.Route, 'text': data.Name }).appendTo(li);
+        $('<a/>', { href: data.Route, text: data.Name }).appendTo(li);
 
         if (data.HaveSubCategories) {
-            $('<div/>', { 'class': 'sublist-toggle' }).appendTo(li);
+            $('<div/>', { class: 'sublist-toggle' }).appendTo(li);
             li.on('mouseenter', function () {
                 $(this).addClass("inside");
                 selfTop.getSubRoot(data.Id, true);
@@ -148,22 +148,16 @@
     mobileMenuCategoryLine: function (data) {
         let selfMobile = this;
 
-        let li = document.createElement('li');
+        let li = $('<li/>');
 
-        let a = document.createElement('a');
-        a.href = data.Route;
-        a.text = data.Name;
-
-        li.appendChild(a);
+        $('<a/>', { href: data.Route, text: data.Name }).appendTo(li);
 
         if (data.HaveSubCategories) {
-            let div = document.createElement('div');
-            div.classList.add('sublist-toggle');
-            div.addEventListener("click", function () { selfMobile.getSubRoot(data.Id, false); });
-            li.appendChild(div);
+            let div = $('<div/>', { class: 'sublist-toggle' }).appendTo(li);
+            div.get(0).addEventListener('click', function () { selfMobile.getSubRoot(data.Id, false); });
         }
 
-        li.setAttribute(this.mobileMenuLineAttr, data.Id);
+        li.attr(this.mobileMenuLineAttr, data.Id);
 
         return li;
     },
